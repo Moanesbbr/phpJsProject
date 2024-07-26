@@ -56,7 +56,7 @@ if (isset($_POST["getProducthome"])) {
                         <div class='product-body'>
                             <p class='product-category'>$cat_name</p>
                             <h3 class='product-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-                            <h4 class='product-price'>RM $pro_price<del class='product-old-price'>RM $pro_dis</del></h4>
+                            <h4 class='product-price'>TND $pro_price<del class='product-old-price'>TND $pro_dis</del></h4>
                         </div>
                     </a>
                 </div>
@@ -95,7 +95,7 @@ if (isset($_POST["gethomeProduct"])) {
                         <div class='product-body'>
                             <p class='product-category'>$cat_name</p>
                             <h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-                            <h4 class='product-price header-cart-item-info'>RM $pro_price<del class='product-old-price'>RM $pro_dis</del></h4>
+                            <h4 class='product-price header-cart-item-info'>TND $pro_price<del class='product-old-price'>TND $pro_dis</del></h4>
                         </div>
                         <div class='add-to-cart'>
                             <button pid='$pro_id' id='product' class='add-to-cart-btn block2-btn-towishlist' href='#'><i class='fa fa-shopping-cart'></i> add to cart</button>
@@ -141,7 +141,7 @@ if (isset($_POST["get_seleted_Category"]) || isset($_POST["search"])) {
                     <div class='product-body'>
                         <p class='product-category'>$cat_name</p>
                         <h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-                        <h4 class='product-price header-cart-item-info'>RM $pro_price<del class='product-old-price'>RM $pro_dis</del></h4>
+                        <h4 class='product-price header-cart-item-info'>TND $pro_price<del class='product-old-price'>TND $pro_dis</del></h4>
                     </div>
                     <div class='add-to-cart'>
                         <button pid='$pro_id' id='product' href='#' tabindex='0' class='add-to-cart-btn'><i class='fa fa-shopping-cart'></i> add to cart</button>

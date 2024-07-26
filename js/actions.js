@@ -193,7 +193,7 @@ $(document).ready(function(){
             net_total += parseFloat($(this).val());
         });
 
-        $('.net_total').html("Total: RM " + net_total);
+        $('.net_total').html("Total: TND " + net_total);
     }
 
     // Checkout details

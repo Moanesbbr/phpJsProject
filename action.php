@@ -129,7 +129,7 @@ if (isset($_POST["getProduct"])) {
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>RM $pro_price <del class='product-old-price'>RM  $pro_dis</del></h4>
+										<h4 class='product-price header-cart-item-info'>TND $pro_price <del class='product-old-price'>TND  $pro_dis</del></h4>
 										
 									</div>
 									<div class='add-to-cart'>
@@ -183,7 +183,7 @@ if (isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || iss
 									<div class='product-body'>
 										<p class='product-category'>$cat_name</p>
 										<h3 class='product-name header-cart-item-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>RM $pro_dis</del></h4>
+										<h4 class='product-price header-cart-item-info'>$pro_price<del class='product-old-price'>TND $pro_dis</del></h4>
 										
 									</div>
 									<div class='add-to-cart'>
@@ -308,7 +308,7 @@ if (isset($_POST["Common"])) {
 												</div>
 												<div class="product-body">
 													<h3 class="product-name"><a href="#">' . $product_title . '</a></h3>
-													<h4 class="product-price"><span class="qty">' . $n . '</span>RM ' . $product_price . '</h4>
+													<h4 class="product-price"><span class="qty">' . $n . '</span>TND ' . $product_price . '</h4>
 												</div>
 												
 											</div>';
@@ -316,7 +316,7 @@ if (isset($_POST["Common"])) {
 
 			echo '<div class="cart-summary">
 				    <small class="qty">' . $n . ' Item(s) selected</small>
-				    <h5>RM ' . $total_price . '</h5>
+				    <h5>TND ' . $total_price . '</h5>
 				</div>'
 ?>
 
