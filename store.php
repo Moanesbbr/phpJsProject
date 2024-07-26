@@ -1,35 +1,7 @@
 <?php
 include 'header.php';
 ?>
-<script id="jsbin-javascript">
-	(function(global) {
-		if (typeof(global) === "undefined") {
-			throw new Error("window is undefined");
-		}
-		var _hash = "!";
-		var noBackPlease = function() {
-			global.location.href += "#";
-			global.setTimeout(function() {
-				global.location.href += "!";
-			}, 50);
-		};
-		global.onhashchange = function() {
-			if (global.location.hash !== _hash) {
-				global.location.hash = _hash;
-			}
-		};
-		global.onload = function() {
-			noBackPlease();
-			document.body.onkeydown = function(e) {
-				var elm = e.target.nodeName.toLowerCase();
-				if (e.which === 8 && (elm !== 'input' && elm !== 'textarea')) {
-					e.preventDefault();
-				}
-				e.stopPropagation();
-			};
-		};
-	})(window);
-</script>
+
 <div class="main main-raised">
 	<div class="section">
 		<div class="container">
@@ -45,7 +17,44 @@ include 'header.php';
 				<div id="store" class="col-md-9">
 					<div class="row" id="product-row">
 						<div class="col-md-12 col-xs-12" id="product_msg"></div>
-						<div id="get_product"></div>
+						<div id="get_product">
+							<?php
+							include 'db.php';
+
+							$search_query = "";
+							if (isset($_GET['query'])) {
+								$search_query = mysqli_real_escape_string($con, $_GET['query']);
+							}
+
+							$category_filter = "";
+							if (isset($_GET['category']) && $_GET['category'] != 0) {
+								$category_filter = "AND category_id = " . (int)$_GET['category'];
+							}
+
+							$sql = "SELECT * FROM products WHERE product_title LIKE '%$search_query%' $category_filter";
+							$result = mysqli_query($con, $sql);
+
+							if (mysqli_num_rows($result) > 0) {
+								while ($row = mysqli_fetch_assoc($result)) {
+									echo '
+                                    <div class="col-md-4 col-xs-6">
+                                        <div class="product">
+                                            <div class="product-img">
+                                                <img src="product_images/' . $row['product_image'] . '" alt="">
+                                            </div>
+                                            <div class="product-body">
+                                                <h3 class="product-name"><a href="#">' . $row['product_title'] . '</a></h3>
+                                                <h4 class="product-price">$' . $row['product_price'] . '</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    ';
+								}
+							} else {
+								echo '<div class="col-md-12"><p>No products found matching your search criteria.</p></div>';
+							}
+							?>
+						</div>
 					</div>
 					<div class="store-filter clearfix">
 						<span class="store-qty">Showing 20-100 products</span>
@@ -59,6 +68,7 @@ include 'header.php';
 		</div>
 	</div>
 </div>
+
 <?php
 include "newslettter.php";
 include "footer.php";

@@ -195,7 +195,7 @@
 						<div id="get_product_home">
 							<?php
 							// Fetch top mobile products
-							$mobile_query = "SELECT * FROM products WHERE product_cat = (SELECT cat_id FROM categories WHERE cat_title = 'Mobile') LIMIT 3";
+							$mobile_query = "SELECT * FROM products WHERE product_cat = 2 LIMIT 3";
 							$run_mobile_query = mysqli_query($con, $mobile_query);
 							if (mysqli_num_rows($run_mobile_query) > 0) {
 								while ($row = mysqli_fetch_array($run_mobile_query)) {
@@ -234,8 +234,8 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-4">
 						<div id="get_product_home2">
 							<?php
-							// Fetch top laptop products
-							$laptop_query = "SELECT * FROM products WHERE product_cat = (SELECT cat_id FROM categories WHERE cat_title = 'Laptop') LIMIT 3";
+							// Fetch top laptop products with category ID 1
+							$laptop_query = "SELECT * FROM products WHERE product_cat = 1 LIMIT 3";
 							$run_laptop_query = mysqli_query($con, $laptop_query);
 							if (mysqli_num_rows($run_laptop_query) > 0) {
 								while ($row = mysqli_fetch_array($run_laptop_query)) {
@@ -246,23 +246,24 @@
 									$pro_image = $row['product_image'];
 									$pro_dis = $row['product_discount'];
 									echo "
-                                        <div class='product-widget'>
-                                            <div class='product-img'>
-                                                <img src='product_images/$pro_image' alt=''>
-                                            </div>
-                                            <div class='product-body'>
-                                                <p class='product-category'>Laptop</p>
-                                                <h3 class='product-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
-                                                <h4 class='product-price'>Rs. $pro_price <del class='product-old-price'>Rs. $pro_dis</del></h4>
-                                            </div>
-                                        </div>
-                                    ";
+                        <div class='product-widget'>
+                            <div class='product-img'>
+                                <img src='product_images/$pro_image' alt=''>
+                            </div>
+                            <div class='product-body'>
+                                <p class='product-category'>Laptop</p>
+                                <h3 class='product-name'><a href='product.php?p=$pro_id'>$pro_title</a></h3>
+                                <h4 class='product-price'>Rs. $pro_price <del class='product-old-price'>Rs. $pro_dis</del></h4>
+                            </div>
+                        </div>
+                    ";
 								}
 							}
 							?>
 						</div>
 					</div>
 				</div>
+
 
 				<div class="col-md-4 col-xs-6">
 					<div class="section-title">
@@ -275,7 +276,7 @@
 						<div>
 							<?php
 							// Fetch top accessories products
-							$accessories_query = "SELECT * FROM products WHERE product_cat = (SELECT cat_id FROM categories WHERE cat_title = 'Accessories') LIMIT 3";
+							$accessories_query = "SELECT * FROM products WHERE product_cat = (SELECT cat_id FROM categories WHERE cat_title = 'Accessories') ";
 							$run_accessories_query = mysqli_query($con, $accessories_query);
 							if (mysqli_num_rows($run_accessories_query) > 0) {
 								while ($row = mysqli_fetch_array($run_accessories_query)) {

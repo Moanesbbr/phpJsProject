@@ -1,17 +1,4 @@
-<?php
-#this is Login form page , if user is already logged in then we will not allow user to access this page by executing isset($_SESSION["uid"])
-#if below statment return true then we will send user to their profile.php page
-//in action.php page if user click on "ready to checkout" button that time we will pass data in a form from action.php page
-if (isset($_POST["login_user_with_product"])) {
-    //this is product list array
-    $product_list = $_POST["product_id"];
-    //here we are converting array into json format because array cannot be store in cookie
-    $json_e = json_encode($product_list);
-    //here we are creating cookie and name of cookie is product_list
-    setcookie("product_list", $json_e, strtotime("+1 day"), "/", "", "", TRUE);
-}
-?>
-
+<!DOCTYPE html>
 <html>
 <style type="text/css">
     .sign {
@@ -66,11 +53,9 @@ if (isset($_POST["login_user_with_product"])) {
         font-family: 'Ubuntu', sans-serif;
     }
 
-
     .un:focus,
     .pass:focus {
         border: 2px solid rgba(0, 0, 0, 0.18) !important;
-
     }
 
     .submit {
@@ -97,77 +82,43 @@ if (isset($_POST["login_user_with_product"])) {
 </style>
 
 <head>
-
-
     <title>Sign in</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-
     <p class="sign" align="center">Sign in</p>
     <img src="https://img.icons8.com/clouds/150/000000/user.png" style="margin-left: 190px;">
 
-    <form class="form1" action="index.php" method="post" id="login">
-
-        <input class="un " type="text" align="center" placeholder="Username" name="email">
+    <form class="form1" id="loginForm">
+        <input class="un" type="text" align="center" placeholder="Username" name="email">
         <input class="pass" type="password" align="center" placeholder="Password" name="password">
-        <input id="myButton" class="submit" type="submit" Value="Login">
-
+        <input class="submit" type="button" Value="Login" id="loginButton">
     </form>
 
+    <div id="loginResponse" align="center"></div>
 
-    </div>
-
+    <script>
+        $(document).ready(function() {
+            $('#loginButton').click(function() {
+                var formData = $('#loginForm').serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: 'login.php', // Make sure this points to your PHP login script
+                    data: formData,
+                    success: function(response) {
+                        $('#loginResponse').html(response);
+                        if (response.includes('login_success')) {
+                            window.location.href = 'index.php'; // Redirect on success
+                        }
+                    },
+                    error: function() {
+                        $('#loginResponse').html('<span style="color:red;">An error occurred.</span>');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
-
-<!--<div class="container-fluid">
-    
-          <div class="login-marg">
-          
-                <form action="index.php" method="post" id="login" class="login100-form ">
-                  <div class="billing-details jumbotron">
-                                    <div class="section-title">
-                                        <h2 class="login100-form-title p-b-49" >Login Here</h2>
-                                    </div>
-                                   
-                                    
-                                    <div class="form-group">
-                                       <label for="email">Email</label>
-                                        <input class="input input-borders" type="email" name="email" placeholder="Email" id="password" required>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                       <label for="email">Password</label>
-                                        <input class="input input-borders" type="password" name="password" placeholder="password" id="password" required>
-                                    </div>
-                                    
-                                    <div class="text-pad" >
-                                       <a href="#">
-                                           forget password ?
-                                       </a>
-                                        
-                                    </div>
-                                   
-                                    
-                                        <input id="myButton" class="primary-btn btn-block" type="submit" name="email"  Value="Login">
-                                        
-                                        <div class="panel-footer"><div class="alert alert-danger"><h4 id="e_msg"></h4></div></div>
-                  
-                                </div>
-                                
-                </form>
-                           
-          
-          </div>        
-  </div>-->
-
-
-
-<script type="text/javascript">
-    document.getElementById("myButton").onclick = function() {
-        myButton.type = "submit";
-        location.href = "/client%20project/techshop/online-shopping-system/index.php";
-    };
-</script>

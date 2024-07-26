@@ -121,14 +121,13 @@ session_start();
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form>
-                                <select class="input-select">
+                            <form id="search-form" action="store.php" method="GET">
+                                <select class="input-select" name="category">
                                     <option value="0">All Categories</option>
-
+                                    <!-- Add other categories here -->
                                 </select>
-                                <input class="input" id="search" type="text" placeholder="Search here">
-                                <button type="submit" id="search_btn" class="search-btn" style="background:  #00bcd4;
-    color: #fff;">Search</button>
+                                <input class="input" id="search" name="query" type="text" placeholder="Search here">
+                                <button type="submit" id="search_btn" class="search-btn" style="background:  #00bcd4; color: #fff;">Search</button>
                             </form>
                         </div>
                     </div>
@@ -275,3 +274,26 @@ session_start();
 
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#search-form').on('submit', function(event) {
+                event.preventDefault();
+                var query = $('#search').val();
+                var category = $('select[name="category"]').val();
+
+                $.ajax({
+                    url: 'store.php',
+                    method: 'GET',
+                    data: {
+                        query: query,
+                        category: category
+                    },
+                    success: function(data) {
+                        var html = $(data).find('#get_product').html();
+                        $('#get_product').html(html);
+                    }
+                });
+            });
+        });
+    </script>
